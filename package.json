@@ -1,0 +1,32 @@
+{
+  "name": "sourdough-timer",
+  "version": "1.0.0",
+  "description": "Sourdough timer with Vite and Electron",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"npm run dev:vite\" \"npm run dev:electron\"",
+    "dev:vite": "vite",
+    "dev:electron": "electronmon .",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juliedelaro/sourdough-timer.git"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "electron": "^39.2.1",
+    "electronmon": "^2.0.4"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.1.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/juliedelaro/sourdough-timer/issues"
+  },
+  "homepage": "https://github.com/juliedelaro/sourdough-timer#readme"
+}
