@@ -23,6 +23,19 @@
     </div>
 
     <script>
+      // when buttons are pushed:
+      document.getElementById("closeBtn").addEventListener("click", () => {
+        if (window.electronAPI) {
+          window.electronAPI.closeWindow();
+        }
+      });
+
+      document.getElementById("minimizeBtn").addEventListener("click", () => {
+        if (window.electronAPI) {
+          window.electronAPI.minimizeWindow();
+        }
+      });
+
       const sourdoughSteps = [
         {
           name: "Stretch & Fold #1",
