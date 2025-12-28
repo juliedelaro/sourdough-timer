@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+
+  <body>
+    <div class="app-title">Sourdough Timer</div>
+    <div class="window-controls">
+      <button class="control-btn minimize-btn" id="minimizeBtn">_</button>
+      <button class="control-btn close-btn" id="closeBtn">x</button>
+    </div>
+
+    <div class="home-content" id="home-content" style="display: block">
+      <img
+        src="./assets/sourdough.png"
+        alt="Sourdough Icon"
+        class="home-icon"
+      />
+      <h1 class="home-text">Let's Strech and Fold!</h1>
+      <p class="sub-text">times may vary depending on temp.</p>
+      <button class="start-button" id="startBtn">Start</button>
+    </div>
+
+    <script>
+      const sourdoughSteps = [
+        {
+          name: "Stretch & Fold #1",
+          seconds: 1800,
+          img: "./assets/stretchandfold.png",
+        },
+        {
+          name: "Stretch & Fold #2",
+          seconds: 1800,
+          img: "./assets/stretchandfold.png",
+        },
+        {
+          name: "Stretch & Fold #3",
+          seconds: 1800,
+          img: "./assets/stretchandfold.png",
+        },
+        { name: "Bulk Fermentation", seconds: 7200 },
+      ];
+
+      let currentStepIndex = 0;
+      let timerInterval;
+      const startBtn = document.getElementById("startBtn");
+
+      const timerView = document.createElement("div");
+      timerView.id = "timer-view";
+      timerView.style.display = "none";
+      timerView.innerHTML = `
+      <h2 id="step-name"></h2>
+       <img id="step-image" src="" alt="Step Image" style="width:150px; display:block; margin:0 auto;"/>
+      <div id="timer-display">00:00</div>
+      <button id="next-step-btn" style="display:none">Next Step</button>
+      `;
+      document.body.appendChild(timerView);
+      const stepImageEl = document.getElementById("step-image");
+
+      const stepNameEl = document.getElementById("step-name");
+      const timerDisplayEl = document.getElementById("timer-display");
+      const nextStepBtn = document.getElementById("next-step-btn");
+
+      function formatTime(sec) {
+        const m = Math.floor(sec / 60)
+          .toString()
+          .padStart(2, "0");
+        const s = (sec % 60).toString().padStart(2, "0");
+        return `${m}:${s}`;
+      }
+
+      function startStep(index) {
+        let remaining = sourdoughSteps[index].seconds;
+        stepNameEl.textContent = sourdoughSteps[index].name;
+        stepImageEl.src = sourdoughSteps[index].img || "";
+        timerDisplayEl.textContent = formatTime(remaining);
+        nextStepBtn.style.display = "none";
+
+        timerInterval = setInterval(() => {
+          remaining--;
+          timerDisplayEl.textContent = formatTime(remaining);
+          if (remaining <= 0) {
+            clearInterval(timerInterval);
+            nextStepBtn.style.display = "block";
+          }
+        }, 1000);
+      }
+
+      startBtn.addEventListener("click", () => {
+        document.getElementById("home-content").style.display = "none";
+        timerView.style.display = "block";
+        startStep(currentStepIndex);
+      });
+
+      nextStepBtn.addEventListener("click", () => {
+        currentStepIndex++;
+        if (currentStepIndex < sourdoughSteps.length) {
+          startStep(currentStepIndex);
+        } else {
+          alert("All steps done!");
+          timerView.style.display = "none";
+          document.getElementById("home-content").style.display = "block";
+          currentStepIndex = 0;
+        }
+      });
+    </script>
+  </body>
+</html>
