@@ -16,6 +16,11 @@
   text-align: center;
 }
 
+.app-title {
+  -webkit-app-region: drag;
+  cursor: move;
+}
+
 * {
   margin: 0;
   padding: 0;
