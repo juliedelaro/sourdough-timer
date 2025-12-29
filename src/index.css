@@ -21,6 +21,19 @@
   cursor: move;
 }
 
+#step-name {
+  margin: 50px auto 10px auto;
+  padding: 12px;
+  font-family: "VCR OSD Mono", monospace;
+  font-size: 20px;
+  font-weight: normal;
+  color: #615147;
+  letter-spacing: 1px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
 * {
   margin: 0;
   padding: 0;
